@@ -1,29 +1,12 @@
 # Write a program to implement the concept of Stemming
 
 import os
+from nltk.stem import PorterStemmer
 
 os.system("cls")
 
-
-# Stemming function
-def stem(word):
-
-    suffixes = [
-        "ingly",
-        "edly",
-        "ing",
-        "ed",
-        "ly",
-        "es",
-        "s"
-    ]
-
-    for suffix in suffixes:
-        if word.endswith(suffix) and len(word) > len(suffix) + 2:
-            return word[:-len(suffix)]
-
-    return word
-
+# Create stemmer
+stemmer = PorterStemmer()
 
 # Input sentence
 sentence = input("Enter a sentence: ")
@@ -35,4 +18,4 @@ words = sentence.lower().split()
 print("\nOriginal words and their stems:")
 
 for word in words:
-    print(word, "->", stem(word))
+    print(word, "->", stemmer.stem(word))

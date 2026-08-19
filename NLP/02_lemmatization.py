@@ -1,43 +1,13 @@
 # Write a program to implement the concept of Lemmatization
 
 import os
+import nltk
+from nltk.stem import WordNetLemmatizer
 
 os.system("cls")
 
-# Dictionary containing words and their base forms
-lemma_dict = {
-    "students": "student",
-    "studies": "study",
-    "studying": "study",
-    "studied": "study",
-    "playing": "play",
-    "played": "play",
-    "plays": "play",
-    "games": "game",
-    "better": "good",
-    "best": "good",
-    "mice": "mouse",
-    "children": "child",
-    "men": "man",
-    "women": "woman",
-    "cars": "car",
-    "running": "run",
-    "ran": "run",
-    "eating": "eat",
-    "ate": "eat"
-}
-
-
-# Lemmatization function
-def lemmatize_word(word):
-    word = word.lower()
-    word = word.strip(".,!?")
-
-    if word in lemma_dict:
-        return lemma_dict[word]
-
-    return word
-
+# Create lemmatizer
+lemmatizer = WordNetLemmatizer()
 
 # Input sentence
 sentence = input("Enter a sentence: ")
@@ -49,6 +19,9 @@ print("\nLemmatization Result")
 print(f"{'Word':<20}{'Lemma':<15}")
 print("-" * 35)
 
+# Apply lemmatization
 for word in words:
-    lemma = lemmatize_word(word)
+    clean_word = word.lower().strip(".,!?")
+    lemma = lemmatizer.lemmatize(clean_word)
+
     print(f"{word:<20}{lemma:<15}")
